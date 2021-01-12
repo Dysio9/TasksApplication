@@ -31,7 +31,7 @@ public class TaskController {
     }
 
     @PostMapping(value = "createTask")
-    public void createTask(TaskDto taskDto) {
-
+    public TaskDto createTask(TaskDto taskDto) {
+        return new TaskDto(1L,"Posted Title", "Posted content");
     }
 }
