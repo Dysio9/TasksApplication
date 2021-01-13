@@ -17,10 +17,11 @@ public class DbService {
         return repository.findAll();
     }
 
-/*
------ Taki sam konstruktor ze wszystkimi parametrami jest tworzony przez @RequiredArgsConstructor -----
-    public DbService(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
-}
-*/
+    public Task getTask(Long id) {
+        return repository.findById();
+    }
+
+    public Task saveTask(final Task task) {
+        return repository.save(task);
+    }
 }
