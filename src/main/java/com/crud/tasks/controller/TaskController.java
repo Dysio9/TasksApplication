@@ -5,6 +5,7 @@ import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
 import com.crud.tasks.service.DbService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,8 +35,10 @@ public class TaskController {
         return new TaskDto(1L, "Edited test title", "Test content");
     }
 
-    @PostMapping(value = "createTask")
+    @PostMapping(value = "createTask", consumes = MediaType.APPLICATION_JSON_VALUE)
     public TaskDto createTask(TaskDto taskDto) {
-        return new TaskDto(1L,"Posted Title", "Posted content");
+        Task task = taskMapper.mapToTask(taskDto);
+        service.saveTask(task);
+        return taskDto;
     }
 }
