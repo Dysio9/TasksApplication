@@ -1,5 +1,6 @@
 package com.crud.tasks.service;
 
+import com.crud.tasks.controller.TaskNotFoundException;
 import com.crud.tasks.domain.Task;
 import com.crud.tasks.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +29,14 @@ public class DbService {
 
     public void deleteTask(Long id) {
         repository.deleteById(id);
+    }
+
+    public Task updateTasksIfPresent(Task task) throws TaskNotFoundException {
+        if (getTask(task.getId()).isPresent()) {
+            saveTask(task);
+            return task;
+        } else {
+            throw new TaskNotFoundException();
+        }
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/v1/task")
 @RequiredArgsConstructor
 public class TaskController {
@@ -30,19 +31,7 @@ public class TaskController {
                 service.getTask(taskId).orElseThrow(TaskNotFoundException::new)
         );
     }
-
-    @PutMapping(value = "updateTask", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public TaskDto updateTask(@RequestBody TaskDto taskDto) throws TaskNotFoundException {
-        if (service.getTask(taskDto.getId()).isPresent()) {
-            Task task = taskMapper.mapToTask(taskDto);
-            Task savedTask = service.saveTask(task);
-            return taskMapper.mapToTaskDto(savedTask);
-        } else {
-            throw new TaskNotFoundException();
-        }
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "createTask", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "createTask", consumes = MediaType.APPLICATION_JSON_VALUE)
     public TaskDto createTask(@RequestBody TaskDto taskDto) {
         Task task = taskMapper.mapToTask(taskDto);
         service.saveTask(task);
@@ -53,4 +42,16 @@ public class TaskController {
     public void deleteTask(@RequestParam Long taskId) {
         service.deleteTask(taskId);
     }
+
+    @PutMapping(value = "updateTask", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public TaskDto updateTask(@RequestBody TaskDto taskDto) throws TaskNotFoundException {
+        Task task = taskMapper.mapToTask(taskDto);
+        service.updateTasksIfPresent(task);
+        return taskDto;
+    }
 }
+
+// # 3 sposoby komunikacji front-endu z back-endem
+// @PathVariable
+// @RequestParam
+// @RequestBody
