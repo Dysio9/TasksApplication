@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 export CATALINA_HOME=/var/lib/tomcat9
 
@@ -33,6 +33,7 @@ copy_file() {
 
 fail() {
    echo "There were errors"
+   exit 1
 }
 
 end() {
