@@ -1,8 +1,13 @@
 # TasksApplication
 
-#### Rest API based on: Spring-web, Spring-data, Hibernate. Using MySQL database and lombok library.
+#### Rest API based on: Spring-web, Spring-data, Hibernate. Using PostgreSQL database and lombok library.
 
-This application is currently developed.
+Visit [GitHub Pages](https://dysio9.github.io/) to see frontend site (based on HTML5, CSS, JavaScript) using this Rest API. To see frondend source go to [this repository](https://github.com/Dysio9/dysio9.github.io)
 
-It will be able to work in the very similar way as trello. User will be able to create his own task and put it to proper lists. \
-After the task will be ready user will be able to move it to another list.
+
+This API allows to: 
+* create task with description and put it info remote database
+* edit every single task
+* delete every single task
+* find task by taskID
+* find all tasks
